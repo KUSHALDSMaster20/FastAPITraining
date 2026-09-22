@@ -1,6 +1,8 @@
 #python project 
 
 from fastapi import FastAPI
+from pydantic import BaseModel
+
 app =FastAPI()
 
 @app.get("/")
@@ -29,3 +31,14 @@ def get_result(usn):
 @app.get("/candidate/{rollno}")
 def get_candidate(rollno:int):
     return{"result: ":"Distinction","rollno":rollno,"type":str(type(rollno))}
+
+#pydantic Modle
+
+class Item(BaseModel):
+    name:str
+    price:float
+    in_stock:bool=True
+
+@app.post("/items")
+def create_item(item:Item):
+    return{"received":item,"total_price":item.price*1.8}
