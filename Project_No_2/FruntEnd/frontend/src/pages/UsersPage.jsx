@@ -5,6 +5,12 @@ import { useEffect, useState } from 'react'
 import { getUsers, createUser, deleteUser } from '../api/client'
 
 const ROLES = ['employee', 'support_engineer', 'team_lead', 'admin']
+const ROLE_LABELS = {
+  employee: 'Hospital Staff',
+  support_engineer: 'Hospital Support Engineer',
+  team_lead: 'Support Team Lead',
+  admin: 'Hospital Administrator',
+}
 const ROLE_BADGE_COLORS = {
   employee: 'secondary',
   support_engineer: 'primary',
@@ -61,7 +67,7 @@ export default function UsersPage() {
         <div className="col-md-2">
           <select className="form-select form-select-sm" value={form.role}
             onChange={e => setForm({ ...form, role: e.target.value })}>
-            {ROLES.map(r => <option key={r} value={r}>{r}</option>)}
+            {ROLES.map(r => <option key={r} value={r}>{ROLE_LABELS[r]}</option>)}
           </select>
         </div>
         <div className="col-md-2">
@@ -82,7 +88,7 @@ export default function UsersPage() {
               <tr key={u.id}>
                 <td>{u.name}</td>
                 <td>{u.email}</td>
-                <td><span className={`badge bg-${ROLE_BADGE_COLORS[u.role] || 'secondary'}`}>{u.role?.replaceAll('_', ' ') || 'unknown'}</span></td>
+                <td><span className={`badge bg-${ROLE_BADGE_COLORS[u.role] || 'secondary'}`}>{ROLE_LABELS[u.role] || u.role?.replaceAll('_', ' ') || 'unknown'}</span></td>
                 <td>{new Date(u.created_at).toLocaleDateString()}</td>
                 <td>
                   <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(u.id)}>Delete</button>
