@@ -13,7 +13,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <div className="container mt-4">
+      <main className="app-main">
         <Routes>
           <Route path="/" element={<Navigate to="/tickets" replace />} />
           <Route path="/users" element={<UsersPage />} />
@@ -22,7 +22,7 @@ export default function App() {
           <Route path="/tickets/:ticketId" element={<TicketDetailPage />} />
           <Route path="/audit-logs" element={<AuditLogsPage />} />
         </Routes>
-      </div>
+      </main>
     </BrowserRouter>
   )
 }
