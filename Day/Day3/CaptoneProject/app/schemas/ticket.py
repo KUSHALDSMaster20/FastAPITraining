@@ -30,6 +30,9 @@ class TicketCreate(BaseModel):
     description: str = Field(..., min_length=5, max_length=2000, description="Full details of the issue")
     category_id: str = Field(..., description="id of an existing Category")
     created_by: str = Field(..., description="id of the Employee raising this ticket")
+    department: str = Field(..., min_length=2, max_length=100, description="Hospital department raising the request")
+    location: str = Field(..., min_length=2, max_length=150, description="Building, ward, or room where help is needed")
+    priority: str = Field(default="normal", pattern="^(low|normal|high|urgent)$")
 
     @field_validator("title", "description")
     @classmethod
@@ -53,6 +56,10 @@ class TicketUpdate(BaseModel):
     title: Optional[str] = Field(default=None, min_length=3, max_length=150)
     description: Optional[str] = Field(default=None, min_length=5, max_length=2000)
     category_id: Optional[str] = Field(default=None)
+    department: Optional[str] = Field(default=None, min_length=2, max_length=100)
+    location: Optional[str] = Field(default=None, min_length=2, max_length=150)
+    priority: Optional[str] = Field(default=None, pattern="^(low|normal|high|urgent)$")
+
 
 
 class TicketAssign(BaseModel):
@@ -85,6 +92,9 @@ class TicketResponse(BaseModel):
     category_id: str
     status: TicketStatus
     created_by: str
+    department: str = ""
+    location: str = ""
+    priority: str = "normal"
     assigned_to: Optional[str] = None
-    created_at: datetime
-    updated_at: datetime
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None

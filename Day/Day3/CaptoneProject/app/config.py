@@ -10,10 +10,10 @@ class Settings(BaseSettings):
 
     # MongoDB Settings
     MONGO_URI: str = "mongodb://localhost:27017"
-    MONGO_DB_NAME: str = "it_servicedesk"
+    MONGO_DB_NAME: str = "hospital_support"
 
     #Gives the app a name 
-    APP_NAME:str = "IT Service Desk App API "
+    APP_NAME:str = "Hospital Support Request System API"
 
     # Informs pydantic-setings to load values from .env file
     model_config= SettingsConfigDict(env_file=".env",env_file_encoding="utf-8")

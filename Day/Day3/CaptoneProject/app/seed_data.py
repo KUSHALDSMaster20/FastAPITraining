@@ -1,6 +1,6 @@
 # scripts/seed_data.py
 
-# use it_servicedesk
+# Uses the hospital_support database configured in app/config.py.
 # db.users.deleteMany({})
 # db.categories.deleteMany({})
 # db.tickets.deleteMany({})
@@ -10,7 +10,7 @@
 #
 # Purpose:
 #   Populates MongoDB with sample data for every entity (User, Category,
-#   Ticket, Comment, Attachment, AuditLog) — at least 8 records each —
+#   Ticket, Comment, Attachment, AuditLog) with sample hospital support data —
 #   with realistic cross-references (a ticket's category_id points to a
 #   real category, a comment's ticket_id points to a real ticket, etc.),
 #   so the API and frontend have something meaningful to show right away.
@@ -72,17 +72,14 @@ USERS = [
      "password": "password123", "role": "admin", "created_at": days_ago(90)},
 ]
 
-# --- 2. Categories (8) -------------------------------------------------------
+# --- 2. Hospital request categories -----------------------------------------
 CATEGORIES = [
-    {"id": "cat-laptop", "name": "Laptop", "description": "Laptop hardware issues", "created_at": days_ago(90)},
-    {"id": "cat-desktop", "name": "Desktop", "description": "Desktop hardware issues", "created_at": days_ago(90)},
-    {"id": "cat-network", "name": "Network", "description": "Wired/Wi-Fi connectivity issues", "created_at": days_ago(90)},
-    {"id": "cat-vpn", "name": "VPN Access", "description": "VPN connection and access issues", "created_at": days_ago(90)},
-    {"id": "cat-software", "name": "Software Installation", "description": "Installing or updating software", "created_at": days_ago(90)},
-    {"id": "cat-email", "name": "Email & Outlook", "description": "Mailbox and Outlook client issues", "created_at": days_ago(90)},
-    {"id": "cat-printer", "name": "Printer", "description": "Printer and scanning issues", "created_at": days_ago(90)},
-    {"id": "cat-mobile", "name": "Mobile Device", "description": "Company phone/tablet issues", "created_at": days_ago(90)},
+    {"id": "cat-equipment", "name": "Equipment issue", "description": "Medical or hospital equipment problem", "created_at": days_ago(90)},
+    {"id": "cat-maintenance", "name": "Maintenance", "description": "Repair or maintenance work", "created_at": days_ago(90)},
+    {"id": "cat-it", "name": "IT issue", "description": "Computer, network, software, or account issue", "created_at": days_ago(90)},
+    {"id": "cat-facility", "name": "Facility request", "description": "Cleaning, room, utilities, or facility support", "created_at": days_ago(90)},
 ]
+
 
 # --- 3. Tickets (8) — spans every lifecycle status at least once -------------
 TICKETS = [
